@@ -1,0 +1,117 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: url(bg.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;   
+    height: 100vh;
+    overflow-x: hidden;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    color: white;
+}
+
+/*general*/
+    .flex {
+        display: flex;
+        gap: var(--gap,1rem);
+    }
+    .grid {
+        display: grid;
+        gap: var(--gap,1rem);
+    }
+
+/**************/
+.logo {
+    width: 50px;
+    background: white;
+    border-radius: 50%;
+    margin: 2rem;
+}
+
+.primary-header {
+    align-items: center ;
+    justify-content: space-between;
+}
+
+.moible-nav-toggle {
+    display: none;
+}
+
+
+.primary-navigation {
+    list-style: none;
+    background: hsl(0 0% 0% / 0.5 );
+    z-index: 1000;
+}
+
+@supports (backdrop-filter: blur(1rem)) {
+    .primary-navigation {
+        background: hsl(0 0% 100% / 0.05 );
+        backdrop-filter: blur(1rem);
+    }
+}
+
+.primary-navigation a {
+    text-decoration: none;
+}
+
+.primary-navigation a > span {
+    font-weight: 700;
+    margin-inline-end: .5em;
+}
+
+@media (max-width:35em) {
+    .primary-navigation {
+        --gap:3rem;
+        position: fixed;
+        inset: 0 0 0 30%;
+        flex-direction: column;
+        padding: min(30vh, 10rem) 2em;
+        transform: translateX(100%);
+        transition: .3s ease-out;
+    }
+
+    .primary-navigation[data-visible="true"]{
+        transform: translateX(0%);
+    }
+
+    .moible-nav-toggle {
+        display: block;
+        position: absolute;
+        top: 2rem;
+        right: 2rem;
+        z-index: 9999;
+        width: 2rem;
+        aspect-ratio: 1;
+        background-image: url(menu.svg);
+        background-size: cover;
+        border-radius: 50px;
+        border: none;
+        cursor: pointer;
+    }
+
+    .moible-nav-toggle[aria-expanded='true'] {
+        background-image: url(close.svg);
+    }
+
+    .moible-nav-toggle span{
+        display: none;
+    }
+}
+
+@media (min-width:35em) and (max-width:55em){
+    .primary-navigation a > span[aria-hidden='true'] {
+        display: none;
+    }
+}
+
+@media (min-width:35em) {
+    .primary-navigation {
+        padding-block: 2em;
+        padding-inline: clamp();
+    }
+}
